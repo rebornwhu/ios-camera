@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -17,20 +18,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtF-KY-R7a">
-                                <rect key="frame" x="20" y="550" width="560" height="30"/>
-                                <state key="normal" title="Pick from Library"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukw-UV-N9I">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-Us-T23">
+                                <rect key="frame" x="20" y="28" width="560" height="476"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ukw-UV-N9I">
                                 <rect key="frame" x="20" y="512" width="560" height="30"/>
                                 <state key="normal" title="New Photo or Library"/>
+                                <connections>
+                                    <action selector="shootPictureOrVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TxV-j8-hAb"/>
+                                </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IVv-Us-T23">
-                                <rect key="frame" x="20" y="28" width="560" height="476"/>
-                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vtF-KY-R7a">
+                                <rect key="frame" x="20" y="550" width="560" height="30"/>
+                                <state key="normal" title="Pick from Library"/>
+                                <connections>
+                                    <action selector="selectExistingPictureOrVideo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QEY-ME-oH5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ukw-UV-N9I" secondAttribute="bottom" constant="58" id="1uk-UG-hpu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ukw-UV-N9I" secondAttribute="trailing" id="3fm-Ej-pbt"/>
+                            <constraint firstItem="IVv-Us-T23" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="6gq-CX-nuW"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IVv-Us-T23" secondAttribute="trailing" id="83o-Ae-9cT"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="Ukw-UV-N9I" secondAttribute="leading" id="CKs-WI-Mnn"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vtF-KY-R7a" secondAttribute="trailing" id="PCB-di-0Rg"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="vtF-KY-R7a" secondAttribute="leading" id="aTT-xB-N2H"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="vtF-KY-R7a" secondAttribute="bottom" constant="20" id="bgd-jw-3wk"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="IVv-Us-T23" secondAttribute="leading" id="cnP-um-Y9e"/>
+                            <constraint firstItem="Ukw-UV-N9I" firstAttribute="top" secondItem="IVv-Us-T23" secondAttribute="bottom" constant="8" id="dzZ-nL-hmY"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="IVv-Us-T23" id="BGG-mp-oa6"/>
+                        <outlet property="takePictureButton" destination="Ukw-UV-N9I" id="Zd4-Mx-D75"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

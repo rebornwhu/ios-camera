@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import MediaPlayer
+import MobileCoreServices
+
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var takePictureButton: UIButton!
 
+    var moviePlayerController: MPMoviePlayerController?
+    var image: UIImage?
+    var movieURL: NSURL?
+    var lastChosenMediaType: String?
+    
     @IBAction func shootPictureOrVideo(sender: UIButton) {
         
     }
@@ -22,14 +30,43 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
+            takePictureButton.hidden = true
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        updateDisplay()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func updateDisplay() {
+        if let mediaType = lastChosenMediaType {
+            imageView.image = image!
+            imageView.hidden = false
+            if moviePlayerController != nil {
+                moviePlayerController!.view.hidden = true
+            }
+        }
+        else if mediaType == kUTTypeMovie as String {
+            if moviePlayerController == nil {
+                moviePlayerController = MPMoviePlayerController(contentURL: movieURL)
+                let movieView = moviePlayerController!.view
+                movieView.frame = imageView.frame
+                movieView.clipsToBounds = true
+                view.addSubview(movieView)
+                setMoviewPlayerLayoutConstraints()
+            }
+            else {
+                moviePlayerController!.contentURL = movieURL
+            }
+            
+            imageView.hidden = true
+            moviePlayerController!.view.hidden = false
+            moviePlayerController!.play()
+        }
     }
-
-
+    
 }
 
